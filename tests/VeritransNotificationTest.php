@@ -19,13 +19,13 @@ class VeritransNotificationTest extends PHPUnit_Framework_TestCase
 {
 
     public function testCanWorkWithJSON() {
-        $tmpfname = tempnam(sys_get_temp_dir(), "veritrans_test");
+        $tmpfname = tempnam(sys_get_temp_dir(), "\Veritrans\test");
         file_put_contents($tmpfname, TEST_CAPTURE_JSON);
 
         VT_Tests::$stubHttp = true;
         VT_Tests::$stubHttpResponse = TEST_CAPTURE_JSON;
 
-        $notif = new Veritrans_Notification($tmpfname);
+        $notif = new \Veritrans\Notification($tmpfname);
 
         $this->assertEquals($notif->transaction_status, "capture");
         $this->assertEquals($notif->payment_type, "credit_card");

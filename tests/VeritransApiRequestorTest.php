@@ -7,12 +7,12 @@ class VeritransApiRequestorTest extends PHPUnit_Framework_TestCase
       VT_Tests::$stubHttp = true;
       VT_Tests::$stubHttpResponse = '{ "status_code": "200" }';
 
-      Veritrans_Config::$curlOptions = array(
+      \Veritrans\Config::$curlOptions = array(
         CURLOPT_HTTPHEADER => array( "User-Agent: testing lib" ),
         CURLOPT_PROXY => "http://proxy.com"
       );
 
-      $resp = Veritrans_ApiRequestor::post("http://example.com", "", "");
+      $resp = \Veritrans\ApiRequestor::post("http://example.com", "", "");
 
       $fields = VT_Tests::lastReqOptions();
       $this->assertTrue(in_array("User-Agent: testing lib", $fields["HTTPHEADER"]));
@@ -23,7 +23,7 @@ class VeritransApiRequestorTest extends PHPUnit_Framework_TestCase
 
     public function tearDown() {
       VT_Tests::reset();
-      Veritrans_Config::$curlOptions = array();
+	    \Veritrans\Config::$curlOptions = array();
     }
 
 }

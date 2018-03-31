@@ -8,8 +8,8 @@ class VtTransactionIntegrationTest extends VtIntegrationTest {
 			array(
 				"bank" => "permata",
 			));
-		$charge_response = Veritrans_VtDirect::charge($charge_params);
-		$status_response = Veritrans_Transaction::status($charge_response->transaction_id);
+		$charge_response = \Veritrans\VtDirect::charge($charge_params);
+		$status_response = \Veritrans\Transaction::status($charge_response->transaction_id);
 
 		$this->assertEquals($status_response->status_code, '201');
 		$this->assertEquals($status_response->transaction_status, 'pending');
@@ -27,8 +27,8 @@ class VtTransactionIntegrationTest extends VtIntegrationTest {
 			array(
 				"bank" => "permata",
 			));
-		$charge_response = Veritrans_VtDirect::charge($charge_params);
-		$cancel_status_code = Veritrans_Transaction::cancel($charge_response->transaction_id);
+		$charge_response = \Veritrans\VtDirect::charge($charge_params);
+		$cancel_status_code = \Veritrans\Transaction::cancel($charge_response->transaction_id);
 
 		$this->assertEquals($cancel_status_code, '200');
 	}
@@ -38,13 +38,13 @@ class VtTransactionIntegrationTest extends VtIntegrationTest {
 			array(
 				"bank" => "permata",
 			));
-		$charge_response = Veritrans_VtDirect::charge($charge_params);
-		$expire = Veritrans_Transaction::expire($charge_response->transaction_id);
+		$charge_response = \Veritrans\VtDirect::charge($charge_params);
+		$expire = \Veritrans\Transaction::expire($charge_response->transaction_id);
 
 		$this->assertEquals($expire->status_code, '407');
 
 		// Verify transaction via API
-		$txn_status = Veritrans_Transaction::status($charge_response->transaction_id);
+		$txn_status = \Veritrans\Transaction::status($charge_response->transaction_id);
 		$this->assertEquals($txn_status->status_code, "407");
 		$this->assertEquals($txn_status->transaction_status, "expire");
 	}

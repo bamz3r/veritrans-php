@@ -1,12 +1,15 @@
 <?php
 /**
  * Send request to Snap API
- * Better don't use this class directly, use Veritrans_Snap
+ * Better don't use this class directly, use Snap
  */
 
-class Veritrans_SnapApiRequestor {
 
-  /**
+namespace Veritrans;
+
+class SnapApiRequestor {
+
+  /*
    * Send GET request
    * @param string  $url
    * @param string  $server_key
@@ -17,7 +20,7 @@ class Veritrans_SnapApiRequestor {
     return self::remoteCall($url, $server_key, $data_hash, false);
   }
 
-  /**
+  /*
    * Send POST request
    * @param string  $url
    * @param string  $server_key
@@ -28,7 +31,7 @@ class Veritrans_SnapApiRequestor {
     return self::remoteCall($url, $server_key, $data_hash, true);
   }
 
-  /**
+  /*
    * Actually send request to API server
    * @param string  $url
    * @param string  $server_key
@@ -50,17 +53,17 @@ class Veritrans_SnapApiRequestor {
       CURLOPT_CAINFO => dirname(__FILE__) . "/../data/cacert.pem"
     );
 
-    // merging with Veritrans_Config::$curlOptions
-    if (count(Veritrans_Config::$curlOptions)) {
+    // merging with Config::$curlOptions
+    if (count(Config::$curlOptions)) {
       // We need to combine headers manually, because it's array and it will no be merged
-      if (Veritrans_Config::$curlOptions[CURLOPT_HTTPHEADER]) {
-        $mergedHeders = array_merge($curl_options[CURLOPT_HTTPHEADER], Veritrans_Config::$curlOptions[CURLOPT_HTTPHEADER]);
+      if (Config::$curlOptions[CURLOPT_HTTPHEADER]) {
+        $mergedHeders = array_merge($curl_options[CURLOPT_HTTPHEADER], Config::$curlOptions[CURLOPT_HTTPHEADER]);
         $headerOptions = array( CURLOPT_HTTPHEADER => $mergedHeders );
       } else {
         $mergedHeders = array();
       }
 
-      $curl_options = array_replace_recursive($curl_options, Veritrans_Config::$curlOptions, $headerOptions);
+      $curl_options = array_replace_recursive($curl_options, Config::$curlOptions, $headerOptions);
     }
 
     if ($post) {
@@ -77,9 +80,9 @@ class Veritrans_SnapApiRequestor {
     curl_setopt_array($ch, $curl_options);
 
     // For testing purpose
-    if (class_exists('VT_Tests') && VT_Tests::$stubHttp) {
+    if (class_exists('\VT_Tests') && \VT_Tests::$stubHttp) {
       $result = self::processStubed($curl_options, $url, $server_key, $data_hash, $post);
-      $info = VT_Tests::$stubHttpStatus;
+      $info = \VT_Tests::$stubHttpStatus;
     } else {
       $result = curl_exec($ch);
       $info = curl_getinfo($ch);
@@ -104,7 +107,7 @@ class Veritrans_SnapApiRequestor {
   }
 
   private static function processStubed($curl, $url, $server_key, $data_hash, $post) {
-    VT_Tests::$lastHttpRequest = array(
+    \VT_Tests::$lastHttpRequest = array(
       "url" => $url,
       "server_key" => $server_key,
       "data_hash" => $data_hash,
@@ -112,6 +115,6 @@ class Veritrans_SnapApiRequestor {
       "curl" => $curl
     );
 
-    return VT_Tests::$stubHttpResponse;
+    return \VT_Tests::$stubHttpResponse;
   }
 }

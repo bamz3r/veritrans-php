@@ -17,7 +17,7 @@ class VeritransVtDirectTest extends PHPUnit_Framework_TestCase
         )
       );
 
-      $charge = Veritrans_VtDirect::charge($params);
+      $charge = \Veritrans\VtDirect::charge($params);
 
       $this->assertEquals($charge->status_code, "200");
 
@@ -42,7 +42,7 @@ class VeritransVtDirectTest extends PHPUnit_Framework_TestCase
       );
 
       try {
-        $paymentUrl = Veritrans_VtDirect::charge($params);
+        $paymentUrl = \Veritrans\VtDirect::charge($params);
       } catch (Exception $error) {
         $errorHappen = true;
         $this->assertContains(
@@ -79,7 +79,7 @@ class VeritransVtDirectTest extends PHPUnit_Framework_TestCase
         "gross_amount": "55000.00"
       }';
 
-      $capture = Veritrans_VtDirect::capture("A27550");
+      $capture = \Veritrans\VtDirect::capture("A27550");
 
       $this->assertEquals($capture->status_code, "200");
 

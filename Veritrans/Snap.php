@@ -3,7 +3,10 @@
  * Create Snap payment page and return snap token
  *
  */
-class Veritrans_Snap {
+
+namespace Veritrans;
+
+class Snap {
 
   /**
    * Create Snap payment page
@@ -17,7 +20,7 @@ class Veritrans_Snap {
    *       'gross_amount' => 10000,
    *     )
    *   );
-   *   $paymentUrl = Veritrans_Snap::getSnapToken($params);
+   *   $paymentUrl = Snap::getSnapToken($params);
    * ```
    *
    * @param array $params Payment options
@@ -29,7 +32,7 @@ class Veritrans_Snap {
     $payloads = array(
       'credit_card' => array(
         // 'enabled_payments' => array('credit_card'),
-        'secure' => Veritrans_Config::$is3ds
+        'secure' => Config::$is3ds
       )
     );
 
@@ -41,15 +44,15 @@ class Veritrans_Snap {
       $params['transaction_details']['gross_amount'] = $gross_amount;
     }
 
-    if (Veritrans_Config::$isSanitized) {
-      Veritrans_Sanitizer::jsonRequest($params);
+    if (Config::$isSanitized) {
+      Sanitizer::jsonRequest($params);
     }
 
     $params = array_replace_recursive($payloads, $params);
 
-    $result = Veritrans_SnapApiRequestor::post(
-        Veritrans_Config::getSnapBaseUrl() . '/transactions',
-        Veritrans_Config::$serverKey,
+    $result = SnapApiRequestor::post(
+        Config::getSnapBaseUrl() . '/transactions',
+        Config::$serverKey,
         $params);
 
     return $result->token;

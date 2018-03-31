@@ -1,6 +1,6 @@
 {
-    "name": "veritrans/veritrans-php",
-    "description": "PHP Wraper for Veritrans VT-Web Payment API.",
+    "name": "bamz3r/veritrans-php",
+    "description": "PHP Wrapper for Veritrans VT-Web Payment API. PSR-4 compatible",
     "homepage": "https://veritrans.co.id",
     "version": "1.1.0",
     "type": "library",
@@ -17,6 +17,10 @@
         {
             "name": "Ismail Faruqi",
             "email": "ismail.faruqi@veritrans.co.id"
+        },
+        {
+            "name": "Bambang Riswanto",
+            "email": "bamz3r@gmail.com"
         }
     ],
     "require": {
@@ -27,6 +31,9 @@
         "psy/psysh": "0.4.*"
     },
     "autoload": {
-        "classmap": [""]
+        "classmap": [""],
+        "psr-4": {
+            "Veritrans\\": "Veritrans"
+        }
     }
 }

@@ -2,7 +2,10 @@
 /**
  * Provide charge and capture functions for VT-Direct
  */
-class Veritrans_VtDirect {
+
+namespace Veritrans;
+
+class VtDirect {
 
   /**
    * Create VT-Direct transaction.
@@ -25,13 +28,13 @@ class Veritrans_VtDirect {
 
     $payloads = array_replace_recursive($payloads, $params);
 
-    if (Veritrans_Config::$isSanitized) {
-      Veritrans_Sanitizer::jsonRequest($payloads);
+    if (Config::$isSanitized) {
+      Sanitizer::jsonRequest($payloads);
     }
 
-    $result = Veritrans_ApiRequestor::post(
-        Veritrans_Config::getBaseUrl() . '/charge',
-        Veritrans_Config::$serverKey,
+    $result = ApiRequestor::post(
+        Config::getBaseUrl() . '/charge',
+        Config::$serverKey,
         $payloads);
 
     return $result;
@@ -48,9 +51,9 @@ class Veritrans_VtDirect {
       'transaction_id' => $param,
     );
 
-    $result = Veritrans_ApiRequestor::post(
-          Veritrans_Config::getBaseUrl() . '/capture',
-          Veritrans_Config::$serverKey,
+    $result = ApiRequestor::post(
+          Config::getBaseUrl() . '/capture',
+          Config::$serverKey,
           $payloads);
 
     return $result;

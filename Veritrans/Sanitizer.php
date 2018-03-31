@@ -4,9 +4,12 @@
  *
  * It truncate fields that have length limit, remove not allowed characters from other fields
  *
- * This feature is optional, you can control it with Veritrans_Config::$isSanitized (default: false)
+ * This feature is optional, you can control it with Config::$isSanitized (default: false)
  */
-class Veritrans_Sanitizer {
+
+namespace Veritrans;
+
+class Sanitizer {
   private $filters;
 
   public function __construct()

@@ -4,7 +4,7 @@ class VeritransVtWebTest extends PHPUnit_Framework_TestCase
 {
 
     public function testGetRedirectionUrl() {
-      Veritrans_Config::$serverKey = 'My Very Secret Key';
+      \Veritrans\Config::$serverKey = 'My Very Secret Key';
       VT_Tests::$stubHttp = true;
       VT_Tests::$stubHttpResponse = '{ "status_code": 200, "redirect_url": "http://host.com/pay" }';
 
@@ -15,7 +15,7 @@ class VeritransVtWebTest extends PHPUnit_Framework_TestCase
         )
       );
 
-      $paymentUrl = Veritrans_Vtweb::getRedirectionUrl($params);
+      $paymentUrl = \Veritrans\Vtweb::getRedirectionUrl($params);
 
       $this->assertEquals($paymentUrl, "http://host.com/pay");
 
@@ -49,7 +49,7 @@ class VeritransVtWebTest extends PHPUnit_Framework_TestCase
       VT_Tests::$stubHttp = true;
       VT_Tests::$stubHttpResponse = '{ "status_code": 200, "redirect_url": "http://host.com/pay" }';
 
-      $paymentUrl = Veritrans_Vtweb::getRedirectionUrl($params);
+      $paymentUrl = \Veritrans\Vtweb::getRedirectionUrl($params);
 
       $this->assertEquals(
         VT_Tests::$lastHttpRequest['data_hash']['transaction_details']['gross_amount'],
@@ -67,7 +67,7 @@ class VeritransVtWebTest extends PHPUnit_Framework_TestCase
       VT_Tests::$stubHttp = true;
       VT_Tests::$stubHttpResponse = '{ "status_code": 200, "redirect_url": "http://host.com/pay" }';
 
-      $paymentUrl = Veritrans_Vtweb::getRedirectionUrl($params);
+      $paymentUrl = \Veritrans\Vtweb::getRedirectionUrl($params);
 
       $this->assertEquals(
         VT_Tests::$lastHttpRequest['data_hash']["vtweb"],
@@ -84,7 +84,7 @@ class VeritransVtWebTest extends PHPUnit_Framework_TestCase
       );
 
       try {
-        $paymentUrl = Veritrans_Vtweb::getRedirectionUrl($params);
+        $paymentUrl = \Veritrans\Vtweb::getRedirectionUrl($params);
       } catch (Exception $error) {
         $errorHappen = true;
         $this->assertEquals(

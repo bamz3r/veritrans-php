@@ -2,7 +2,10 @@
 /**
  * Veritrans Configuration
  */
-class Veritrans_Config {
+
+namespace Veritrans;
+
+class Config {
 
   /**
    * Your merchant's server key
@@ -27,7 +30,7 @@ class Veritrans_Config {
   public static $is3ds = false;
   /**
    * Enable request params sanitizer (validate and modify charge request params).
-   * See Veritrans_Sanitizer for more details
+   * See Sanitizer for more details
    * @static
    */
   public static $isSanitized = false;
@@ -47,8 +50,8 @@ class Veritrans_Config {
    */
   public static function getBaseUrl()
   {
-    return Veritrans_Config::$isProduction ?
-        Veritrans_Config::PRODUCTION_BASE_URL : Veritrans_Config::SANDBOX_BASE_URL;
+    return Config::$isProduction ?
+        Config::PRODUCTION_BASE_URL : Config::SANDBOX_BASE_URL;
   }
 
   /**
@@ -56,7 +59,7 @@ class Veritrans_Config {
    */
   public static function getSnapBaseUrl()
   {
-    return Veritrans_Config::$isProduction ?
-        Veritrans_Config::SNAP_PRODUCTION_BASE_URL : Veritrans_Config::SNAP_SANDBOX_BASE_URL;
+    return Config::$isProduction ?
+        Config::SNAP_PRODUCTION_BASE_URL : Config::SNAP_SANDBOX_BASE_URL;
   }
 }
