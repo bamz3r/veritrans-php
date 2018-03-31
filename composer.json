@@ -1,6 +1,6 @@
 {
     "name": "bamz3r/veritrans-php",
-    "description": "PHP Wrapper for Veritrans VT-Web Payment API. PSR-4 compatible",
+    "description": "PHP Wrapper for Veritrans VT-Web Payment API. PSR-4 compatible and fix some bugs",
     "homepage": "https://veritrans.co.id",
     "version": "1.1.0",
     "type": "library",
