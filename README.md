@@ -1,6 +1,11 @@
 Veritrans-PHP
 ===============
+Enchanced version feature:
+- Compatible with PSR-4 autoload
+- Fix some bug
 
+
+Original README:
 [![Build Status](https://travis-ci.org/veritrans/veritrans-php.svg)](https://travis-ci.org/veritrans/veritrans-php)
 
 Veritrans is now :arrow_right: [Midtrans](https://midtrans.com)
