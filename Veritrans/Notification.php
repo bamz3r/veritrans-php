@@ -20,6 +20,10 @@ class Notification {
   public function __construct($input_source = "php://input")
   {
     $raw_notification = json_decode(file_get_contents($input_source), true);
+
+    if(!is_array($raw_notification)) {
+	    $raw_notification = json_decode($raw_notification, true);
+    }
     $status_response = Transaction::status($raw_notification['transaction_id']);
     $this->response = $status_response;
   }
