@@ -4,6 +4,17 @@ Enchanced version feature:
 - Compatible with PSR-4 autoload
 - Fix some bug
 
+If you want to use my version first remove the original of veritrans/veritrans-php and then add bamz3r/veritrans-php to your composer.json:
+
+```json
+{
+	"require": {
+		"bamz3r/veritrans-php": "dev-master"
+	}
+}
+```
+
+and run `composer install` on your terminal.
 
 Original README:
 
