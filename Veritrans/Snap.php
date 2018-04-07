@@ -25,7 +25,7 @@ class Snap {
    *
    * @param array $params Payment options
    * @return string Snap token.
-   * @throws Exception curl error or veritrans error
+   * @throws \Exception curl error or veritrans error
    */
   public static function getSnapToken($params)
   {

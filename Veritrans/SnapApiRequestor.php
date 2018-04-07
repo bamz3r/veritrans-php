@@ -91,14 +91,14 @@ class SnapApiRequestor {
 
 
     if ($result === FALSE) {
-      throw new Exception('CURL Error: ' . curl_error($ch), curl_errno($ch));
+      throw new \Exception('CURL Error: ' . curl_error($ch), curl_errno($ch));
     }
     else {
       $result_array = json_decode($result);
       if ($info['http_code'] != 201) {
         $message = 'Veritrans Error (' . $info['http_code'] . '): '
             . implode(',', $result_array->error_messages);
-        throw new Exception($message, $info['http_code']);
+        throw new \Exception($message, $info['http_code']);
       }
       else {
         return $result_array;
